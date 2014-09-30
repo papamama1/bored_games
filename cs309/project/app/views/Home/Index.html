@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Bored Games</title>
+		
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+        <link rel="stylesheet" href="/public/css/global.css">
+        <!--link rel="stylesheet" href="../../../public/css/global.css"-->
+		
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
+	<body ng-app="project">
+		
+		<div id="MainContentContainer">
+			
+			<div id="AngularPageContainer">
+				<div ng-view >
+				</div>
+			</div> <!-- END container -->
+			
+			<nav class="navbar navbar-default" role="navigation" ng-controller="NavControl">
+				<div class="container-fluid">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#login-controls-collapse">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+						<a class="navbar-brand" href="/#/">Bored Games</a>
+					</div>
+					<div class="collapse navbar-collapse" id="login-controls-collapse">
+						<ul id="navbar_buttons" class="nav navbar-nav navbar-right">
+							<li>
+								<button ng-hide="User.Name" ng-click="$location.path('/login')" id="signin" class="btn btn-primary navbar-btn">Login</button>
+								<button ng-show="User.Name" ng-click="logout()" id="signout" class="btn btn-danger navbar-btn">Log Out</button>
+                                <button ng-show="User.Name" ng-click="$root.showInbox = !$root.showInbox; $root.newMessage = false;" class="btn navbar-btn btn-default" ng-class="{'btn-warning': $root.newMessage}">
+                                    <i class="fa fa-inbox"></i> Inbox
+                                </button>
+							</li>
+						</ul>
+						<p ng-show="User.Name" class="navbar-text navbar-right">Logged in as <a href="/#/settings" class="navbar-link">{{ "{{" }} User.FirstName }} &quot;{{ "{{" }} User.Name }}&quot; {{ "{{" }} User.LastName }}</a></p>
+					</div>
+				</div>
+			</nav> <!-- END navbar -->
+			
+			<div id="footer">
+				<div class="container">
+					<p class="text-muted">
+					Bored Games is a group project made for Iowa State University COM S 309 Spring 2014<br>
+					©2014 Chris, Datong, Luke, Richard. ALL RIGHTS RESERVED 
+					</p>
+				</div>
+			</div>
+		</div>
+		<!-- END Main Content Container -->
+		
+		<div ng-controller="SocialControl">
+			<div id="friendWindow">
+				<div id="friendListContainer">
+					<div class="friendContainer" ng-click="showChat(f);" ng-repeat="f in friends" ng-mouseenter="showCard(f, $event)" ng-mouseleave="hideCard(f, $event)">
+						<span>
+							<img class="avatar" ng-class="{'online': f.Status == 0, 'busy': f.Status == 1, 'offline': f.Status == 2}" {{ .chatAvatarSrc }} alt="User Avatar">
+							{{ "{{" }} f.FirstName }}
+							&quot;{{ "{{" }} f.Name }}&quot;
+							{{ "{{" }} f.LastName }}
+						</span>
+						<a title="View profile" ng-href="/#/profile/{{"{{"}} f.Name }}" class="pull-right btn btn-warning">
+							<span class="glyphicon glyphicon-user"></span>
+						</a>
+						<div ng-show="f.status" class="ng-hide bg-info">
+							&quot;{{ "{{" }} f.Signature }}&quot;
+						</div>
+					</div>
+				</div>
+                <a id="addFriendToggle" class="pull-right btn btn-default" ng-class="{'active': addFriendTextBox}" ng-click="addFriendTextBox=!addFriendTextBox;">
+                    <span class="glyphicon glyphicon-search"></span>
+                    Add Friend
+                </a>
+                <form id="addFriendTextBox" ng-show="addFriendTextBox" ng-submit="addFriend();" ng-class="{'has-error': addFriendTextBoxError}">
+                    <div class="form-group">
+				        <input class="form-control input-sm" type="text" required placeholder="Type E-Mail or player name..." ng-model="newFriendId"/>
+                        <button type="submit" class="btn btn-primary">
+							Add
+						</button>
+                        <span ng-show="addFriendTextBoxError" class="help-block">
+							{{ "{{" }} addFriendTextBoxError }}
+						</span>
+                    </div>
+                </form>
+            </div> <!-- END friendWindow -->
+			
+			<a id="socialToggle" class="btn btn-info" title="View friends" ng-show="User.Name" ng-click="toggleSocial();" ng-class="{'btn-danger':displayFriendWindow}">
+                <!--i class="fa fa-comment-o"></i>
+                <span>Social</span-->
+				<span class="glyphicon glyphicon-user"></span>
+				<span style="position:relative;top:5px;left:-10px;" class="glyphicon glyphicon-user"></span>
+				<span style="position:relative;top:0;left:-20px;" class="glyphicon glyphicon-user"></span>
+			</a>
+			
+			
+            <div id="chatWindowGroup">
+				<span ng-repeat="cw in chatWindowList">
+					<div class="chatWindow" ng-repeat="f in friends | filter:{Id:cw}">
+						<i class="pull-right fa fa-times-circle-o fa-lg" ng-click="closeChat(f.Id)"></i>
+						<h4>{{ "{{" }} f.FirstName }} &quot;{{ "{{" }}f.Name }}&quot; {{ "{{" }} f.LastName }}</h4>
+						<div class="log" id='chatWindow_messageLog_{{ "{{" }} f.Id }}'>
+							<div ng-repeat="cl in chatLogs | filter:{Id:cw}">
+								<div class="message alert alert-success" ng-repeat="l in cl.Messages" ng-class="{'pull-right alert-info':(l.Name=='Me')}">
+									<strong>{{ "{{" }} l.Name }}:</strong>
+									{{ "{{" }} l.Message }}
+								</div>
+							</div>
+							<br/>
+						</div>
+						<form ng-submit="sendMessage(f.Id,f.Name,msg);msg='';">
+							<input class="form-control input-sm" type="text" placeholder="Type message..." ng-model="msg">
+						</form>
+					</div>
+				</span>
+            </div>
+			<!-- END chat window group -->
+		</div>
+		<!-- END social pane -->
+
+        <div id="inbox" class="panel panel-info" ng-show="$root.showInbox" ng-controller="InboxControl">
+            <div class="panel-heading">
+                <h3 class="panel-title text-center">Inbox ({{ "{{" }} messages.length }})</h3>
+            </div>
+            <div class="panel-body">
+                <ul>
+                    <li ng-repeat="m in messages">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <img class="avatar img-rounded" {{ .inboxAvatarSrc }} />
+                             </div>
+                             <div class="col-md-9">
+                                 <p>
+                                    {{ "{{" }} m.Message }}
+                                 </p>
+                                <button type="button" class="btn btn-success" ng-click="accept($index)">
+                                    <i class="fa fa-check"></i> Accept
+                                </button>
+                                <button type="button" class="btn btn-danger" ng-click="decline($index)">
+                                    <i class="fa fa-times"></i> Decline
+                                </button>
+                             </div>
+                        </div>
+                    </li>
+                    <li ng-hide="messages.length" class="noMessage text-center">
+                        No New Messages
+                    </li>
+                </ul>
+            </div>
+        </div>	
+		
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.2/angular.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.2/angular-route.js"></script>
+        <script src="//twitter.github.io/typeahead.js/releases/latest/typeahead.bundle.js"></script>
+        <script src="/public/js/global.js"></script>
+    </body>
+</html>

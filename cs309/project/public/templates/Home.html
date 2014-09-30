@@ -1,0 +1,162 @@
+<span ng-if="user.Name!=undefined">
+	<!-- Logged User -->
+	<div id="home-firstRow" class="row">
+		<div class="col-md-7">
+			<div class="panel panel-default" id="home-playerInfo">
+				<div class="panel-body">
+					<h1>
+						<a href="/#/profile/{{user.Name}}">
+							{{user.Name}}
+						</a>
+					</h1>
+					<h3>Welcome, {{user.FirstName}} {{user.LastName}}</h3>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-5" id="playButtonContainer">
+			<a id="home-playButton" href="/#/gameCreation" class="btn btn-primary btn-lg">
+				Play now!
+			</a>
+		</div>
+		
+	</div>
+
+	<div id="home-secondRow" class="row">
+		<div class="col-md-7">
+			<div class="panel panel-default" id="home-announcements">
+				<div class="panel-heading">
+					<h3>Announcements</h3>
+				</div>
+				<div class="panel-body">
+					<div id="home-announcementList">
+						<div class="announcement" ng-repeat="a in announcements">
+							<h4>
+								{{a.Title}}
+								<br/>
+								<small>
+									{{a.Body}}
+								</small>
+							</h4>
+						</div>
+						<!-- Connect the beginning to the end of the loop so that it can infinite loop -->
+						<span ng-if="announcements.length>0">
+							<div class="announcement">
+								<h4>
+									{{announcements[0].Title}}
+									<br/>
+									<small>
+										{{announcements[0].Body}}
+									</small>
+								</h4>
+							</div>
+						</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--div class="col-md-1"></div-->
+		<div class="col-md-5">
+			<div class="panel panel-default" id="home-matchHistory">
+				<div class="panel-heading">
+					<h3>Match History:</h3>
+				</div>
+				<div class="panel-body">
+					<div>
+                        <p ng-repeat="m in matches">
+                            Played {{ m.Name }} and 
+                            <span class="text-warning" ng-if="m.Result == 0"><b>Tied</b></span>
+                            <span class="text-success" ng-if="m.Result == 1"><b>Won</b></span>
+                            <span class="text-danger" ng-if="m.Result == 2"><b>Lost</b></span>
+                            <span class="text-muted" ng-if="m.Result == 3"><b>Disconnected</b></span>
+                        </p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</span>
+<span ng-if="user.Name==undefined">
+    <div class="jumbotron">
+        <h1>Bored Games is Here</h1>
+        <p>Bored Games is a cloud based gaming platform that delivers fantastic gaming experiences: anytime, anywhere. </p>
+        <p><a class="btn btn-primary btn-lg" href="#/login" role="button">Login or Register Now</a></p>
+    </div>
+	<!-- GUEST USER -->
+    <div class="row">
+        <div class="col-md-4">
+            <div class="row">
+                <div class="col-md-2 landing-icons">
+                    <i class="fa fa-smile-o fa-4x"></i>
+                </div>
+                <div class="col-md-10 landing-feature">
+                    <h3>Easy To Start</h3>
+                    Spend one minute to register and start playing right away! Nothing to download, just use your browser!
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="row">
+                <div class="col-md-2 landing-icons">
+                    <i class="fa fa-rocket fa-4x"></i>
+                </div>
+                <div class="col-md-10 landing-feature">
+                    <h3>Ultra Fast</h3>
+                    Our innovative architecture guarentees you a smooth gaming experience: just game, no lag. 
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="row">
+                <div class="col-md-2 landing-icons">
+                    <i class="fa fa-arrows-alt fa-4x"></i>
+                </div>
+                <div class="col-md-10 landing-feature">
+                    <h3>Cross Platform</h3>
+                    Windows, Linux, Mac, runs on everywhere you needed. 
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="row">
+                <div class="col-md-2 landing-icons">
+                    <i class="fa fa-users fa-4x"></i> 
+                </div>
+                <div class="col-md-10 landing-feature">
+                    <h3>Stay Social</h3>
+                    Stay connected with your friend anytime with our social service. Invite them to your game with a single click!
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="row">
+                <div class="col-md-2 landing-icons">
+                    <i class="fa fa-github fa-4x"></i>
+                </div>
+                <div class="col-md-10 landing-feature">
+                    <h3>Developer Friendly</h3>
+                    Develop your own game and run on our platform! Follow our API, write your logic, and we will handle the rest. 
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="row">
+                <div class="col-md-2 landing-icons">
+                    <i class="fa fa-shield fa-4x"></i>
+                </div>
+                <div class="col-md-10 landing-feature">
+                    <h3>Stay Safe</h3>
+                    Our platform uses industry standard technologies to protect your personal data and privacy. 
+                </div>
+            </div>
+        </div>
+    </div>
+	<br/>
+</span>
+
+
+
+
+
+

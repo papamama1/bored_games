@@ -1,0 +1,58 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+module:testrunner
+
+GET     /                                               Home.Index
+GET     /api/getAnnouncements                           Home.GetAnnouncements
+POST    /api/login                                      User.DoLogin
+POST    /api/register                                   User.DoRegister
+GET     /api/isloggedin                                 User.IsLoggedIn
+POST    /api/user/updateSettings                        User.UpdateSettings
+GET     /api/user/nameExists                            User.NameExists
+GET     /avatar/:userId                                 User.Avatar
+GET     /api/profile/:userName                          User.GetUserProfile
+GET     /logout                                         User.Logout
+
+# Social
+GET     /api/social/getFriendList                       Social.GetFriendList
+GET     /api/social/addFriend/:friendId                 Social.AddFriend
+GET     /api/social/acceptFriendRequest/:id             Social.AcceptFriendRequest
+GET     /api/social/gameInvite/:roomId/:friendId        Social.GameInvite
+GET     /api/social/deleteFriend/:friendId              Social.RemoveFriend
+WS      /api/social/feed                                Social.Feed
+
+# Game
+GET     /api/game/list                                  Game.List
+POST    /api/game/create                                Game.Create
+GET     /api/game/getInfo/:roomId/:password             Game.RoomInfo
+GET     /api/game/getInfo/:roomId                       Game.RoomInfo
+WS      /api/game/socket/:roomId                        Game.Socket
+GET     /game/proxy/:gameId                             Game.Proxy
+GET     /api/game/result                                Game.RecentGame
+GET     /api/game/result/:playerId                      Game.GameHistoryByPlayer
+
+# Admin
+GET     /admin                                          Admin.Index
+GET     /admin/games                                    Admin.Games
+GET     /admin/games/add                                Admin.AddGame
+POST    /admin/games/add                                Admin.DoAddGame
+GET     /admin/games/delete/:gameId                     Admin.DeleteGame
+GET     /admin/announcements                            Admin.Announcements
+GET     /admin/announcements/add                        Admin.AddAnnouncement
+POST    /admin/announcements/add                        Admin.DoAddAnnouncement
+GET     /admin/announcements/delete/:announcementId     Admin.DeleteAnnouncement
+GET     /admin/users                                    Admin.Users
+GET     /admin/users/delete/:userId                     Admin.DeleteUser
+GET     /admin/rooms                                    Admin.Rooms
+GET     /admin/onlineUsers                              Admin.OnlineUsers
+
+# Ignore favicon requests
+GET     /favicon.ico                                    404
+
+# Map static resources from the /app/public folder to the /public path
+GET     /public/*filepath                               Static.Serve("public")
+
+# Catch all
+*       /:controller/:action                            :controller.:action

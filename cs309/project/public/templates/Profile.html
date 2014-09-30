@@ -1,0 +1,169 @@
+<!--
+	
+	This file is for a users profile page.
+	
+-->
+
+<div class="container">
+
+<span ng-if="profile">
+	<div class="row" id="profile-firstRow">
+		<!--div id="profile-settings">
+			GEAR
+		</div-->
+		<div id="profile-avatar">
+            <img ng-if="profile" ng-src="/avatar/{{profile.Id}}" alt="avatar">
+			<a ng-if="profile.Id == user.Id" href="/#/settings">
+				<span class="glyphicon glyphicon-pencil"></span>
+			</a>
+		</div>
+		<div id="profile-username">
+			<h2>{{profile.Name}}</h2>
+            <button ng-if="profile.Id != user.Id && profile.IsFriend" type="button" class="btn btn-success" ng-click="toggleFriends($event, profile.Id, profile.IsFriend)"><i class="fa fa-check"></i> Friends</button>
+            <button ng-if="profile.Id != user.Id && !profile.IsFriend" type="button" class="btn btn-danger" ng-click="toggleFriends($event, profile.Name, profile.IsFriend)"><i class="fa fa-check"></i> Not Friends</button>
+		</div>
+	</div>
+	
+	<div class="row" id="profile-secondRow">
+		<!--div id="profile-gameList">
+			<span ng-if="gameList==null;">
+				Loading game list...
+			</span>
+			
+			<span ng-if="gameList!=null;">
+				<ul class="nav nav-pills nav-stacked">
+						<li ng-class="{'active':(selectedGame==0)}">
+							<a ng-click="selectedGame=0;">
+								All
+							</a>
+						</li>
+					<li ng-repeat="g in gameList" ng-class="{'active':($parent.selectedGame==g.Name)}">
+						<a ng-click="$parent.selectedGame=g.Name;">
+							{{g.Name}}
+						</a>
+					</li>
+				</ul>
+			</span>
+		</div-->
+		<div id="profile-infoContainer">
+			<span ng-if="stats==null">
+				Loading game statistics...
+			</span>
+			<span ng-if="stats!=null">	
+				<div id="profile-tabContainer">
+					<ul class="nav nav-tabs">
+						<li ng-repeat="t in tabs" ng-class="{'active':(tabs[selectedTab]==t)}">
+							<a ng-click="$parent.selectedTab=$index;">
+								{{t}}
+							</a>
+						</li>
+					</ul>
+				</div>
+				<div id="profile-info">
+					<div ng-if="selectedTab==0">
+						<!-- history -->
+						<div ng-repeat="h in stats[0]">
+							<div class="panel" ng-class="{ 'panel-warning text-warning': h.resultIndex==0, 'panel-success text-success': h.resultIndex==1, 'panel-danger text-danger': h.resultIndex==2, 'panel-default text-muted': h.resultIndex==3 }">
+								<div class="panel-body">
+									<h3 class="pull-left">Game: {{ h.name }}</h3>
+									<h3 class="pull-right">Status: {{ h.result }}</h3>
+									<div class="clearfix"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div ng-if="selectedTab==1">
+						<!-- stats -->
+						<div ng-repeat="s in stats[1]">
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h3>Game: {{ s.name }}</h3>
+								</div>
+								<div class="panel-body">
+									
+									<div class="row">
+										<div class="col-sm-4">
+											<span class="text-primary">
+												Games Played: {{ s.total }}
+												<br/>
+												Win Percentage: {{ s.winPerc }}
+											</span>
+											<br/>
+										</div>
+										<div class="col-sm-4">	
+											<span class="text-success">
+												{{ s.wins }} Wins
+											</span>
+											<br/>
+											<span class="text-danger">
+												{{ s.losses }} Losses
+											</span>
+											<br/>
+										</div>
+										<div class="col-sm-4">
+											<span class="text-warning">
+												{{ s.ties }} Ties
+											</span>
+											<br/>
+											<span class="text-muted">
+												{{ s.disconnects }} Disconnects
+											</span>
+										</div>	
+									</div>
+									
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--
+					<span ng-repeat="s in stats[selectedTab]">
+						<div class="panel panel-default" ng-if="selectedGame==0 || selectedGame==s.name">
+							<div class="panel-heading">
+								<div class="panel-title">
+									<h3>{{gameNameList[s.name]}}</h3>
+								</div>
+							</div>
+							<div class="panel-body">
+								<span ng-if="tabs[selectedTab]=='History'">
+									<strong class="text-success" ng-if="s.wins==1 && s.losses==0">
+										Game Won
+									</strong>
+									<strong class="text-danger" ng-if="s.losses==1 && s.wins==0">
+										Game Lost
+									</strong>
+									<strong class="text-muted" ng-if="!(s.losses==1 && s.wins==0) && !(s.wins==1 && s.losses==0)">
+										Unknown Result
+									</strong>
+									<br/>
+									<span class="text-info"><strong>Game Lasted:</strong> {{ s.deltaTime }}</span>
+									<br/>
+									<span class="text-info"><strong>Played:</strong> {{ s.deltaDate }} ago</span>
+								</span>
+								<span ng-if="tabs[selectedTab]=='Total'">
+									<span class="text-success"><strong>Games Won:</strong> {{s.wins}}</span>
+									<br/>
+									<span class="text-danger"><strong>Games Lost:</strong> {{s.losses}}</span>
+									<br/>
+									<span class="text-info"><strong>Total Time Played:</strong> {{ s.deltaTime }}</span>
+									<br/>
+									<span class="text-info"><strong>Last Played:</strong> {{ s.deltaDate }} ago</span>
+								</span>
+							</div>
+						</div>
+					</span>
+					-->
+				</div>
+			</span>
+		</div>
+	</div>
+</span>
+<span ng-if="!profile">
+	<h3>
+		Unable to find the user specified.
+		<br/>
+		
+	</h3>
+</span>
+
+</div>
+

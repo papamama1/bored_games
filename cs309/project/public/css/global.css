@@ -1,0 +1,542 @@
+
+
+/********* general rules **********/
+
+
+#home-firstRow, #home-secondRow, #profile-firstRow, #profile-secondRow{
+	min-width:400px;
+}
+
+body{
+	overflow:hidden;
+}
+
+/********* Index.html **********/
+
+
+#MainContentContainer{
+	/*
+		Grabs the whole screen for the main window
+		It will be shifted by the panel animation so that they do not overlay
+	*/
+	position:absolute;
+	top:0px;
+	bottom:0px;
+	left:0px;
+	right:0px;
+}
+
+#AngularPageContainer{
+	/*
+		Fits the angular ng-view around the header and footer,
+		which is required to force scrolling on the content without
+		forcing the height of the window or relying on
+		non-standard js to do it
+	*/
+	position:absolute;
+	top:52px;
+	bottom:60px;
+	left:0px;
+	right:0px;
+	overflow-x:hidden;
+	overflow-y:auto;
+	padding: 20px 20px 0 20px;
+}
+
+
+#navbar_buttons {
+    margin-left: 1em;
+}
+
+#footer {
+    position: absolute;
+    bottom: 0px;
+	left:0px;
+	right:0px;
+    height: 60px;
+	padding-top:5px;
+	padding-left:5em;
+	font-size:.9em;
+    background-color: #f5f5f5;
+}
+
+
+/*******   chat stuffs   ********/
+
+#friendWindow{
+	position:absolute;
+	top:0px;
+	left:0px;
+	bottom:0px;
+	width:300px;
+	box-shadow:0 0 2px 2px gray;
+	background:white;
+}
+
+#friendListContainer{
+	overflow-x:hidden;
+	overflow-y:scroll;
+	width: 300px;
+	/* required to map height correctly without bad js code */
+	position:absolute;
+	top:0px;
+	left:0px;
+	right:0px;
+	bottom:50px;
+}
+
+.friendContainer {
+    cursor: pointer;
+	width: 280px;
+	padding:10px;
+	padding-right:0px;
+    border-bottom: 1px solid #E3E3E3;
+}
+
+.friendContainer:hover {
+    background-color: #EBEBEB;
+}
+
+.friendContainer .avatar {
+    width: 30px;
+    height: 30px;
+    margin-right: 5px;
+}
+
+.friendContainer .avatar.online {
+    box-shadow: 0 0 5px 2px green;
+}
+
+.friendContainer .avatar.busy {
+    box-shadow: 0 0 5px 2px #FFC830;
+}
+
+.friendContainer .avatar.offline {
+    box-shadow: 0 0 5px 2px gray;
+}
+
+.friendContainer div{
+	font-size:.8em;
+	padding:10px;
+}
+
+#socialToggle{
+	position: fixed;
+	bottom: 10px;
+	left: 10px;
+	width:4em;
+}
+
+#chatWindowGroup {
+    position: fixed;
+    bottom: 0px;
+    left: 300px;
+}
+
+.chatWindow {
+    float: left;
+    margin-left: 1em;
+    width: 300px;
+    padding: 1em;
+    background-color: white;
+    box-shadow: 0 0 2px 2px gray;
+}
+
+.chatWindow h4 {
+    padding-bottom: 10px;
+    border-bottom: 1px solid gray;
+}
+
+.chatWindow .log {
+    height: 300px;
+    overflow-x: hidden;
+	overflow-y: auto;
+}
+
+.chatWindow .log .message{
+	width:220px;
+	word-wrap:break-word;
+	padding:5px;
+	margin:5px;
+	float:left;
+}
+
+.chatWindow .log br{
+	clear:both;
+}
+
+.chatWindow i {
+    cursor: pointer;
+    display: none;
+}
+
+.chatWindow:hover i {
+    display: inline;
+}
+
+#addFriendToggle {
+	position: absolute;
+	bottom: 10px;
+	left: 162px;
+}
+
+#addFriendTextBox {
+	position: absolute;
+	bottom: 50px;
+	left: 10px;
+    width: 280px;
+}
+
+#addFriendTextBox input {
+    width: 75%;
+    display: inline-block;
+}
+
+/********* home.html **********/
+
+#home-firstRow #home-firstRow>div #home-firstRow>div>div #home-firstRow>div>div>div{
+	height:150px;
+}
+
+#home-secondRow #home-secondRow>div #home-secondRow>div>div{
+	height:200px;
+}
+
+#home-firstRow #playButtonContainer{
+	height:100%;
+	vertical-align:middle;
+	text-align:center;
+	padding:20px;
+}
+
+#home-announcementList{
+	position:relative;
+	top:0px;
+	left:0px;
+}
+
+#home-announcements .panel-body, #home-matchHistory .panel-body{
+	overflow:hidden;
+	height:200px;
+}
+
+#home-announcements .announcement{
+	padding:1px;
+	width:100%;
+	height:180px;
+}
+
+#home-playButton {
+    width: 60%;
+    height: 80%;
+}
+
+/********* profile.html **********/
+
+
+#profile-avatar{
+	width:128px;
+	height:128px;
+	margin:10px;
+	position:relative;
+	display:inline-block;
+}
+#profile-avatar img{
+	width:100%;
+	height:100%;
+}
+#profile-avatar .glyphicon{
+	display:none;
+	/* overlays pencil icon on the up right corner of the avatar */
+	position:absolute;
+	top:0px;
+	right:0px;
+	
+	padding:5px;
+	cursor:pointer;
+	background-color:#FFF;
+}
+#profile-avatar:hover .glyphicon{
+	display:block;
+}
+#profile-avatar .glyphicon:hover{
+	background-color:#777;
+	color:white;
+}
+
+#profile-username{
+	display:inline-block;
+	padding:20px;
+	padding-bottom:0px;
+	margin-bottom:20px;
+}
+
+#profile-gameList, #profile-infoContainer, .profile-tab{
+	float:left;
+}
+
+#profile-firstRow br, #profile-secondRow br{
+	clear:both;
+}
+
+#profile-firstRow, #profile-secondRow{
+	vertical-align:bottom;
+}
+
+#profile-gameList{
+	width:24%;
+	height:312px;
+}
+
+#profile-gameList li{
+	cursor:pointer;
+}
+
+#profile-infoContainer{
+	/*width:74%;*/
+	width:100%;
+}
+
+#profile-tabContainer{
+	width:100%;
+	height:20%;
+}
+#profile-tabContainer li{
+	cursor:pointer;
+}
+
+#profile-info{
+	width:100%;
+	padding:20px;
+	/*
+	border-left:1px solid #DDD;
+	border-right:1px solid #DDD;
+	*/
+}
+
+.profile-statsRepeater div{
+	margin-bottom:5px;
+	margin-top:5px;
+}
+
+
+/********* gameCreation.html **********/
+
+#creation-row1{
+	min-width:600px;
+}
+
+#creation-gameSelectionContainer{
+	width:30%;
+}
+
+#creation-gameSelectionContainer .panel-body{
+	width:100%;
+	height:400px;
+	overflow-x:hidden;
+	overflow-y:auto;
+}
+
+#creation-gameSelectionContainer .gameButton{
+	width:100%;
+	height:40px;
+	cursor:pointer;
+	overflow:none;
+}
+
+#creation-altsPanelContainer{
+	margin-left:5%;
+	width:60%;
+}
+
+#creation-altsPanel{
+	width:100%;
+}
+
+/********* gameScreen.html **********/
+
+#game-sidePanel, #game-sidePanel .panel, #game-sidePanel .panel-body{
+	margin:0px;
+	padding:2px;
+}
+
+#game-roomInfo dl{
+	position:relative;
+	left:-65px;
+	top:0px;
+	font-size:.8em;
+}
+
+#game-sidePanel .panel{
+	margin-bottom:10px;
+}
+
+#game-chatWindow{
+	height:250px;
+	margin-bottom:10px;
+}
+
+#game-chatScroll .log .lowest{
+	font-size:.9em;
+	padding:2px;
+}
+
+#game-chatScroll .log .bg-primary{
+	padding:2px;
+}
+
+#game-chatWindow #game-chatScroll{
+	width:100%;
+	height:210px;
+	display:block;
+	overflow-x:hidden;
+	overflow-y:auto;
+	word-wrap:break-word;
+}
+
+#game-playerList{
+	min-height:150px;
+}
+
+#game-playerList .playerlistItem>div{
+	padding:5px;
+}
+
+#game-playerList .playerlistItem img {
+    height: 25px;
+}
+
+#game-playerList .btn{
+	margin-left:4px;
+}
+
+#game-iframe{
+	min-height: 100%;
+    margin-bottom: 0;
+}
+
+#game-friendInvite .btn, #game-friendInvite .search{
+	width:100%;
+}
+
+#game-friendInvite a{
+	cursor:pointer;
+}
+
+#game-iframe iframe {
+    width: 100%;
+    min-height: 100%;
+    border: none;
+}
+
+/* typeahead.js */
+.tt-query {
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+     -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+
+.tt-hint {
+  color: #999
+}
+
+.tt-dropdown-menu {
+  width: 300px;
+  margin-top: 12px;
+  padding: 8px 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  -webkit-border-radius: 8px;
+     -moz-border-radius: 8px;
+          border-radius: 8px;
+  -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+     -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+          box-shadow: 0 5px 10px rgba(0,0,0,.2);
+}
+
+.tt-suggestion {
+  padding: 3px 20px;
+  font-size: 18px;
+  line-height: 24px;
+}
+
+.tt-suggestion.tt-cursor {
+  color: #fff;
+  background-color: #0097cf;
+
+}
+
+.tt-suggestion p {
+  margin: 0;
+}
+
+.empty-message {
+  padding: 5px 10px;
+  text-align: center;
+}
+
+.twitter-typeahead {
+    display: block !important;
+}
+
+/* END typeahead.js */
+
+/********* Settings.html **********/
+
+#Settings_avatar, #Settings_upload_new_avatar {
+    margin-left: 20px;
+}
+
+#Settings_avatar_upload {
+    margin-top: 20px;
+}
+
+#Settings_avatar {
+    height: 80px;
+}
+
+/* Inbox */
+
+#inbox {
+    position: absolute;
+    top: 55px;
+    right: 30px;
+    width: 30%;
+}
+
+#inbox .panel-body {
+    padding: 0;
+}
+
+#inbox .noMessage {
+    font-size: 15px;
+}
+
+#inbox ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+#inbox ul li {
+    padding: 10px;
+}
+
+#inbox ul li:hover {
+    background-color: #f5f5f5;
+}
+
+#inbox ul li:not(:nth-last-child(-n+2)) {
+    border-bottom: 1px solid #ddd;
+}
+
+#inbox .avatar {
+    width: 90px;
+    height: 90px;
+}
+
+/* Home.html */
+.landing-feature {
+    font-size: 18px;
+}
+

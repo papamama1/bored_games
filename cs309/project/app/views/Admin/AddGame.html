@@ -1,0 +1,34 @@
+{{set . "Title" "Add a New Game"}}
+{{template "Admin/header.html" .}}
+<h1 class="page-header">Add a New Game</h1>
+<form class="form-horizontal" role="form" action="{{url "Admin.AddGame"}}" method="post">
+    {{with $field := field "game.Name" .}}
+        <div class="form-group {{$field.ErrorClass}}">
+            <label for="{{$field.Name}}" class="col-sm-2 control-label">Game Name</label>
+            <div class="col-sm-10">
+                <input type="text" required class="form-control" name="{{$field.Name}}" value="{{$field.Flash}}">
+                <span class="help-block">{{$field.Error}}</span>
+            </div>
+        </div>
+    {{end}}
+    {{with $field := field "Email" .}}
+        <div class="form-group {{$field.ErrorClass}}">
+            <label for="{{$field.Name}}" class="col-sm-2 control-label">Game Owner's E-Mail</label>
+            <div class="col-sm-10">
+                <input type="email" required class="form-control" name="{{$field.Name}}" value="{{$field.Flash}}">
+                <span class="help-block">{{$field.Error}}</span>
+            </div>
+        </div>
+    {{end}}
+    {{with $field := field "game.URL" .}}
+        <div class="form-group {{$field.ErrorClass}}">
+            <label for="{{$field.Name}}" class="col-sm-2 control-label">Game Entry URL (Absolute)</label>
+            <div class="col-sm-10">
+                <input type="text" required class="form-control" name="{{$field.Name}}" value="{{$field.Flash}}">
+                <span class="help-block">{{$field.Error}}</span>
+            </div>
+        </div>
+    {{end}}
+    <button type="submit" class="btn btn-default">Submit</button>
+</form>
+{{template "Admin/footer.html" .}}

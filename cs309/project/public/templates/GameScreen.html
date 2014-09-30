@@ -1,0 +1,77 @@
+<div class="col-sm-3">
+	
+	<div id="game-sidePanel" class="collapse navbar-collapse">
+		<div id="game-chat-collapse">
+			<div class="panel panel-default" id="game-chatWindow">
+				<div id="game-chatScroll">
+					<div ng-repeat="m in messages">
+						<div class="log alert-warning" ng-attr-title="Sent [{{ m.Timestamp }}]">
+						<div ng-class="{'alert-success':m.Self}">
+						<div class="lowest" ng-class="{'alert-danger':m.Highlight}">
+							<span ng-if="$index<1 || messages[$index-1].Name!=m.Name">
+								<span class="bg-primary">{{ m.Name }}</span>:
+							</span>
+							{{ m.Message }}
+						</div>
+						</div>
+						</div>
+					</div>
+				</div>
+                <form ng-submit="sendChatMessage(chatMessage); chatMessage = '';">
+                    <input ng-model="chatMessage" type="text" required class="form-control" placeholder="Type message...">
+                </form>
+			</div><!-- END chat pane -->
+			<div class="panel panel-default" id="game-playerList">
+				<span ng-if="playerList.length<1">
+					Waiting for other players...
+				</span>
+				<div class="playerlistItem" ng-repeat="p in playerList">
+					<div ng-class="{'alert-info':$index%2==1}">
+                        <img ng-src="/avatar/{{ p.Id }}" alt="Player Avatar">
+						{{ p.Name }}
+						<!--<a title="View Profile" class="pull-right btn btn-warning btn-xs">
+							<span class="glyphicon glyphicon-user"></span>
+                        </a>-->
+						<span ng-if="!playerIsFriend(p);">
+							<button title="Add as friend" class="pull-right btn btn-success btn-xs" ng-click="addFriend($event, p.Name)">
+								<span class="glyphicon glyphicon-plus"></span>
+							</button>
+						</span>
+						<div class="clearfix"></div>
+					</div>
+				</div>
+			</div><!-- END playerlist pane -->
+			<!-- invite other players -->
+			<div id="game-friendInvite" ng-if="playerList.length<maxCapacity" class="panel">
+                <form ng-submit="invite(playerName);">
+                    <div class="form-group" ng-class="{'has-error': inviteFriendTextBoxError, 'has-success': inviteFriendTextBoxError == false}">
+				    <input id="inviteSearch" class="search form-control input-sm" type="text" ng-init="typeahead()" placeholder="Invite by typeing name or E-Mail and hit Enter">
+                        <span ng-show="inviteFriendTextBox" class="help-block">
+							{{ inviteFriendTextBox }}
+						</span>
+                    </div>
+                    <input type="submit" style="position: absolute; left: -9999px"/>
+                </form>
+			</div><!-- END invite other players -->
+			<div class="panel panel-default" id="game-roomInfo">
+                <dl class="dl-horizontal">
+                    <dt>Room Name</dt>
+                    <dd>{{ roomName }}</dd>
+                    <dt>Room Password</dt>
+                    <dd>{{ passwordProtected ? 'Yes' : 'No' }}</dd>
+                    <dt>Room Capacity</dt>
+                    <dd>{{ maxCapacity }}</dd>
+                    <dt>Game</dt>
+                    <dd>{{ gameName }}</dd>
+                </dl>
+			</div>
+		</div>
+	</div>
+</div> <!-- END sidepanel -->
+
+
+<div class="col-sm-9">
+	<div class="panel panel-default" id="game-iframe">
+        <iframe></iframe>
+	</div>
+</div>

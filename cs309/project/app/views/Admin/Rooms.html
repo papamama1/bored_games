@@ -1,0 +1,31 @@
+{{set . "Title" "Active Rooms"}}
+{{template "Admin/header.html" .}}
+<h1 class="page-header">Active Rooms</h1>
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Room ID</th>
+                <th>Name</th>
+                <th>Status</th>
+                <th>Capacity</th>
+                <th>Password</th>
+                <th>Game</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{range .result}}
+            <tr>
+                <td>{{.RoomId}}</td>
+                <td>{{.Room.Name}}</td>
+                <td>{{.Room.StatusToString}}</td>
+                <td>{{.Room.Capacity}}</td>
+                <td>{{.Room.Password}}</td>
+                <td>{{.GameName}}</td>
+            </tr>
+            {{end}}
+        </tbody>
+    </table>
+</div>
+{{template "Admin/footer.html" .}}

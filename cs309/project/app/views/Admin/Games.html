@@ -1,0 +1,32 @@
+{{set . "Title" "All Games"}}
+{{template "Admin/header.html" .}}
+<h1 class="page-header">All Games</h1>
+
+<a href="{{url "Admin.AddGame"}}" class="btn btn-primary btn-lg">Add a New Game</a>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Owner</th>
+                <th>Entry URL</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{range .games}}
+            <tr>
+                <td>{{.Id}}</td>
+                <td>{{.Name}}</td>
+                <td>{{.Owner.Name}}</td>
+                <td>{{.URL}}</td>
+                <td>
+                    <a class="btn btn-danger" href="{{url "Admin.DeleteGame" .Id}}">Delete</a>
+                </td>
+            </tr>
+            {{end}}
+        </tbody>
+    </table>
+</div>
+{{template "Admin/footer.html" .}}

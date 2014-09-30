@@ -1,0 +1,73 @@
+<style>
+    #register {
+        display: none;
+    }
+</style>
+<div class="container">
+	<div class="row">
+		<div class="col-md-6">
+			<h3>Login</h3>
+			<form id="login" role="form" ng-submit="login()">
+				<div class="form-group" ng-class="{'has-error': LoginEmailError}">
+					<label for="Email">E-MAIL ADDRESS</label>
+					<input name="Email" required type="email" class="form-control">
+					<span class="help-block" ng-show="LoginEmailError">{{ LoginEmailError }}</span>
+				</div>
+				<div class="form-group" ng-class="{'has-error': LoginPasswordError}">
+					<label for="Password">PASSWORD</label>
+					<input name="Password" required type="password" class="form-control">
+					<span class="help-block" ng-show="LoginPasswordError">{{ LoginPasswordError }}</span>
+				</div>
+				<button class="btn btn-primary">Login</button>
+			</form>
+		</div><!-- END Login DIV -->
+		<div class="col-md-6">
+			<h3>Need an Account?</h3>
+			<button id="register_now" type="button" class="btn btn-info btn-lg">Create an Account</button>
+			<form id="register" role="form" ng-submit="register()">
+				<div class="form-group" ng-class="{'has-error': RegEmailError}">
+					<label for="user.Email">E-MAIL ADDRESS</label>
+					<input name="user.Email" required type="email" class="form-control">
+					<span class="help-block" ng-show="RegEmailError">{{ RegEmailError }}</span>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="user.Password">PASSWORD</label>
+							<input name="user.Password" required ng-model="Password" type="password" class="form-control">
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group" ng-class="{'has-error': RegPasswordError}">
+							<label for="retypePassword">RETYPE PASSWORD</label>
+							<input name="retypePassword" required ng-model="retypePassword" type="password" class="form-control">
+							<span class="help-block" ng-show="RegPasswordError">{{ RegPasswordError }}</span>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="user.FirstName">FIRST NAME</label>
+							<input name="user.FirstName" ng-model="FirstName" required type="text" class="form-control">
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="user.LastName">LAST NAME</label>
+							<input name="user.LastName" ng-model="LastName" required type="text" class="form-control">
+							<span class="help-block">{{$field.Error}}</span>
+						</div>
+					</div>
+				</div>
+				<div class="form-group" ng-class="{'has-error': RegNameError}">
+					<label for="user.Name">PLAYER NAME</label>
+					<input name="user.Name" ng-model="Name" required type="text" class="form-control">
+					<span class="help-block">Player name is the name that will be seen by non friend players. </span>
+					<span class="help-block" ng-show="RegNameError">{{ RegNameError }}</span>
+				</div>
+				<button type="submit" class="btn btn-primary">Register</button>
+			</form>
+		</div><!-- END Register DIV -->
+	</div>
+</div>

@@ -1,0 +1,54 @@
+{{set . "ERROR_CLASS" "has-error"}}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>{{.Title}}</title>
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+        <link href="/public/css/Admin/global.css" rel="stylesheet">
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="{{url "Admin.Index"}}">Bored Games</a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="{{url "User.Logout"}}">Logout</a></li>
+                        <li><a href="{{url "Home.Index"}}">Back to Platform</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-3 col-md-2 sidebar">
+                    <ul class="nav nav-sidebar">
+                        <li{{if eq .Action "Index"}} class="active"{{end}}><a href="{{url "Admin.Index"}}">Dashboard</a></li>
+                        <li{{if eq .Action "Games"}} class="active"{{end}}><a href="{{url "Admin.Games"}}">Games</a></li>
+                        <li{{if eq .Action "Announcements"}} class="active"{{end}}><a href="{{url "Admin.Announcements"}}">Announcements</a></li>
+                        <li{{if eq .Action "Users"}} class="active"{{end}}><a href="{{url "Admin.Users"}}">Users</a></li>
+                        <li{{if eq .Action "Rooms"}} class="active"{{end}}><a href="{{url "Admin.Rooms"}}">Active Rooms</a></li>
+                        <li{{if eq .Action "OnlineUsers"}} class="active"{{end}}><a href="{{url "Admin.OnlineUsers"}}">Online Users</a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+                    {{if .flash.error}}
+                    <div class="alert alert-danger">
+                        {{.flash.error}}
+                    </div>
+                    {{end}}
+                    {{if .flash.success}}
+                    <div class="alert alert-success">
+                        {{.flash.success}}
+                    </div>
+                    {{end}}

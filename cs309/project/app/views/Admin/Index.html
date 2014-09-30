@@ -1,0 +1,8 @@
+{{set . "Title" "Dashboard"}}
+{{template "Admin/header.html" .}}
+<h1 class="page-header">Dashboard</h1>
+<h3>Registered User: {{.userCount}}</h3>
+<h3>Total Games: {{.gameCount}}</h3>
+<h3>Online User: {{.onlineCount}}</h3>
+<h3>Total Active Room: {{.roomCount}}</h3>
+{{template "Admin/footer.html" .}}

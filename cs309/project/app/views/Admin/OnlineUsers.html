@@ -1,0 +1,23 @@
+{{set . "Title" "Active Rooms"}}
+{{template "Admin/header.html" .}}
+<h1 class="page-header">Online Users</h1>
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>User ID</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{range .result}}
+            <tr>
+                <td>{{.TagName}}</td>
+                <td>{{.Room.Status}}</td>
+            </tr>
+            {{end}}
+        </tbody>
+    </table>
+</div>
+{{template "Admin/footer.html" .}}

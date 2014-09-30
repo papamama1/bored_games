@@ -1,0 +1,28 @@
+{{set . "Title" "All Announcements"}}
+{{template "Admin/header.html" .}}
+<h1 class="page-header">All Announcements</h1>
+
+<a href="{{url "Admin.AddAnnouncement"}}" class="btn btn-primary btn-lg">Add a New Announcement</a>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Body</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{range .announcements}}
+            <tr>
+                <td>{{.Title}}</td>
+                <td>{{.Body}}</td>
+                <td>
+                    <a class="btn btn-danger" href="{{url "Admin.DeleteAnnouncement" .Id}}">Delete</a>
+                </td>
+            </tr>
+            {{end}}
+        </tbody>
+    </table>
+</div>
+{{template "Admin/footer.html" .}}

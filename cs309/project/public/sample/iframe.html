@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset=utf-8 />
+    <title></title>
+    <script>
+        var platform = null;
+        function main(p) {
+            platform = p;
+            platform.setOnMessageCallback(function(from, obj) {
+                console.log(from, 'Sent', obj);
+            });
+            platform.setStartCallback(function(selfId) {
+                console.log('Game started, I am ', selfId);
+            });
+            platform.setSwitchMasterCallback(function(masterId) {
+                console.log("Master is", masterId);
+            });
+            platform.setPlayerListChangeCallback(function(players) {
+                console.log('Player list changed, new list is: ', players);
+            });
+        }
+    </script>
+</head>
+<body>
+    
+    <p>
+        <button onclick="platform.start(); platform.send({'test': 'message'});">Start</button>
+        <button onclick="platform.reportResult(platform.WIN, 2);">Report</button> <!-- 3 is the winner's Id -->
+        <!--<button onclick="platform.reportResult(platform.TIE, null);">Report Tie</button> -->
+    </p>
+
+</body>
+</html>

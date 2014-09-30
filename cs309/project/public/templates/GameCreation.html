@@ -1,0 +1,63 @@
+
+<!--
+	
+	Screen upon which you select the game that you want to play
+	
+-->
+
+
+<div id="creation-row1" class="row">
+    <div class="pull-left panel" id="creation-gameSelectionContainer" ng-class="{'panel-primary': !gameSelected, 'panel-default': gameSelected}">
+		<div class="panel-heading">
+			Select a game
+		</div>
+		<div class="panel-body">
+			<span ng-if="gameList==null">Loading the game list.</span>
+			<ul class="nav nav-pills nav-stacked">
+				<li ng-repeat="g in gameList" ng-class="{'active':($parent.selectedGame==g.Id)}">
+					<a class="gameButton" ng-click="$parent.selectedGame=g.Id; $parent.gameSelected = true;">
+						{{g.Name}}
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+    <div ng-show="gameSelected" id="creation-altsPanelContainer" class="pull-left panel panel-primary">
+		<div class="panel-heading">
+            Room Settings
+		</div>
+		<div id="creation-altsPanel" class="panel-body">
+            <form ng-submit="createGame()" class="form-horizontal" role="form">
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Room Name</label>
+                    <div class="col-sm-8">
+                      <input ng-model="roomName" type="text" required class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Room Password (Optional)</label>
+                    <div class="col-sm-8">
+                      <input ng-model="roomPassword" type="password" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Room Capacity</label>
+                    <div class="col-sm-8">
+                      <input ng-init="roomCapacity = 5;" ng-model="roomCapacity" type="number" min="1" max="5" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-4 col-sm-8">
+                        <!--button type="submit" class="btn btn-primary btn-lg">Play!</button-->
+						<button type="submit" class="btn btn-primary btn-lg">Play</button>
+                    </div>
+                </div>
+                </div>
+            </form>
+		</div>
+	</div>
+    <div class="clearfix"></div>
+</div>
+
+
+

@@ -1,0 +1,51 @@
+<form id="Settings_form" action="/api/user/updateSettings" method="post" class="form-horizontal" role="form" enctype="multipart/form-data">
+    <div class="form-group">
+        <label class="col-sm-2 control-label">First Name</label>
+        <div class="col-sm-5">
+            <input name="FirstName" ng-model="User.FirstName" type="text" required class="form-control">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Last Name</label>
+        <div class="col-sm-5">
+            <input name="LastName" ng-model="User.LastName" type="text" required class="form-control">
+        </div>
+    </div>
+    <div class="form-group" ng-class="{'has-error': NameError}">
+        <label class="col-sm-2 control-label">Player Name</label>
+        <div class="col-sm-5">
+            <input name="Name" ng-model="User.Name" ng-blur="checkIfNameExists(User.Name);" type="text" required class="form-control">
+        </div>
+        <span class="help-block" ng-show="NameError">{{ NameError }}</span>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Password</label>
+        <div class="col-sm-5">
+            <input name="Password" ng-model="User.Password" type="password" class="form-control" placeholder="Leave Empty If Not Changing" ng-change="PasswordError = User.Password != User.RetypePassword">
+        </div>
+    </div>
+    <div class="form-group" ng-if="User.Password" ng-class="{'has-error': PasswordError}">
+        <label class="col-sm-2 control-label">Retype Password</label>
+        <div class="col-sm-5">
+            <input name="RetypePassword" ng-model="User.RetypePassword" type="password" class="form-control" placeholder="Type the same password again">
+        </div>
+        <span class="help-block" ng-show="PasswordError">Password mismatch</span>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Avatar</label>
+        <div class="col-sm-5">
+            <div>
+                <b>Current Avatar</b>
+                <img id="Settings_avatar" ng-src="/avatar/{{User.Id}}">
+                <button ng-hide="showAvatarUpload" ng-click="showAvatarUpload = true;" id="Settings_upload_new_avatar" type="button" class="btn btn-default">Upload a New Avatar</button>
+            </div>
+            <input name="Avatar" id="Settings_avatar_upload" ng-show="showAvatarUpload" type="file" class="form-control">
+            <span class="help-block" ng-show="showAvatarUpload">Supported format: jpg</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-5">
+            <button ng-disabled="NameError || PasswordError" type="submit" class="btn btn-default">Save</button>
+        </div>
+    </div>
+</form>
